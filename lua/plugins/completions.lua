@@ -18,15 +18,17 @@ return {
             luasnip.lsp_expand(args.body)
           end,
         },
+
         mapping = cmp.mapping.preset.insert({
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<Tab>"] = cmp.mapping.select_next_item(),
-          ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+          ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+          ["<C-Down>"] = cmp.mapping.select_next_item(),
+          ["<C-Up>"] = cmp.mapping.select_prev_item(),
           ["<Down>"] = function(fallback) fallback() end,
           ["<Up>"] = function(fallback) fallback() end,
         }),
+
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
