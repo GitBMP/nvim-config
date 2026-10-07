@@ -19,10 +19,23 @@ return {
     config = function()
       vim.lsp.config("pyright", {})
       vim.lsp.config("clangd", {})
-      vim.lsp.config("rust_analyzer", {})
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            check = { command = "clippy" },
+          },
+        },
+      })
       vim.lsp.enable("pyright")
       vim.lsp.enable("clangd")
       vim.lsp.enable("rust_analyzer")
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.rs",
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
