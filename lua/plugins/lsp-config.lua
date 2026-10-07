@@ -10,7 +10,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     opts = {
-      ensure_installed = { "pyright", "clangd" },
+      ensure_installed = { "pyright", "clangd", "rust_analyzer" },
     },
   },
   {
@@ -19,8 +19,10 @@ return {
     config = function()
       vim.lsp.config("pyright", {})
       vim.lsp.config("clangd", {})
+      vim.lsp.config("rust_analyzer", {})
       vim.lsp.enable("pyright")
       vim.lsp.enable("clangd")
+      vim.lsp.enable("rust_analyzer")
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})

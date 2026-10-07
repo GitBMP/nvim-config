@@ -7,16 +7,17 @@ return {
       require("nvim-treesitter.install").compilers = { "zig" }
     end
 
-    require("nvim-treesitter").setup({
-      ensure_installed = {
-        "python", "cpp", "javascript",
-        "html", "css", "json", "lua"
-      },
-    })
+    local languages = {
+      "python", "cpp", "javascript",
+      "html", "css", "json", "lua", "rust", "toml",
+    }
+
+    require("nvim-treesitter").install(languages)
+
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "python", "cpp", "javascript", "html", "css", "json", "lua" },
+      pattern = languages,
       callback = function()
-        vim.treesitter.start()
+        pcall(vim.treesitter.start)
       end,
     })
   end,
